@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en" data-bs-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Menghitung Nilai Sin Cos Tan</title>
+    <link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+      rel="stylesheet"
+    />
+    <script src="bootstrap/js/bootstrap.bundle.min.js"></script>
+    <style>
+      input::-webkit-outer-spin-button,
+      input::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+      }
+
+      /* Firefox */
+      input[type="number"] {
+        -moz-appearance: textfield;
+      }
+    </style>
+  </head>
+  <body style="font-family: 'Poppins', sans-serif">
+    <header>
+      <nav class="navbar navbar-expand-lg bg-body-tertiary">
+        <div class="container-fluid">
+          <a class="navbar-brand bg-light text-dark rounded p-1" href="#">
+            <img
+              src="img/logo.png"
+              alt="Logo"
+              width="30"
+              height="24"
+              class="d-inline-block align-text-top"
+            />
+            Miqdar</a
+          >
+          <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav ms-auto">
+              <li class="nav-item">
+                <a class="nav-link" href="index.html">Home</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link active" href="sin.html">Sin</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="cos.html">Cos</a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="tan.html">Tan</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <main>
+      <div class="container mt-3">
+        <div
+          class="w-25 border rounded shadow p-3 text-center position-absolute top-50 start-50 translate-middle"
+        >
+          <ul class="nav nav-pills justify-content-center">
+            <li class="nav-item">
+              <button
+                type="button"
+                id="sudutBerbagai"
+                class="nav-link text-body active"
+              >
+                Sudut Berbagai
+              </button>
+            </li>
+            <li class="nav-item">
+              <button
+                type="button"
+                id="sudutIstimewa"
+                class="nav-link text-body"
+              >
+                Sudut Istimewa
+              </button>
+            </li>
+          </ul>
+          <h3 class="my-3 text-center">Nilai dari Sin</h3>
+          <form>
+            <div class="form-floating mb-3">
+              <input
+                type="number"
+                name="degree"
+                id="degree"
+                class="form-control"
+                placeholder="Masukan Nilai Sudut"
+              />
+              <label for="degree">Nilai Sudut</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input
+                type="text"
+                name="result"
+                id="result"
+                class="form-control"
+                placeholder="Hasil"
+                readonly
+              />
+              <label for="result">Hasil</label>
+            </div>
+            <button type="button" id="resultBut" class="btn btn-primary">
+              Cari
+            </button>
+          </form>
+        </div>
+      </div>
+    </main>
+
+    <script>
+      const degree = document.getElementById("degree");
+      const result = document.getElementById("result");
+      let caributton = document.getElementById("resultBut");
+      const form = document.querySelector("form");
+      const SudutBerbagai = document.getElementById("sudutBerbagai");
+      const SudutIstimewa = document.getElementById("sudutIstimewa");
+
+      function createSelectElement() {
+        const select = document.createElement("select");
+        select.id = "degree";
+        select.className = "form-select";
+        select.innerHTML = `
+                <option selected class="d-none">Tekan untuk Memilih</option>
+                <option value="0">0&deg;</option>
+                <option value="30">30&deg;</option>
+                <option value="45">45&deg;</option>
+                <option value="60">60&deg;</option>
+                <option value="90">90&deg;</option>
+                <option value="120">120&deg;</option>
+                <option value="135">135&deg;</option>
+                <option value="150">150&deg;</option>
+                <option value="180">180&deg;</option>
+                <option value="210">210&deg;</option>
+                <option value="225">225&deg;</option>
+                <option value="240">240&deg;</option>
+                <option value="270">270&deg;</option>
+                <option value="300">300&deg;</option>
+                <option value="315">315&deg;</option>
+                <option value="330">330&deg;</option>
+                <option value="360">360&deg;</option>
+        `;
+        return select;
+      }
+
+      sudutBerbagai.addEventListener("click", () => {
+        result.value = "";
+        sudutBerbagai.className = "nav-link text-body active";
+        sudutIstimewa.className = "nav-link text-body";
+
+        // Remove the select element if it exists and replace with input
+        const selectElement = document.getElementById("degree");
+        if (selectElement && selectElement.tagName === "SELECT") {
+          selectElement.remove();
+          const input = document.createElement("input");
+          input.type = "number";
+          input.name = "degree";
+          input.id = "degree";
+          input.className = "form-control";
+          input.placeholder = "Masukan Nilai Sudut";
+          const label = document.querySelector('label[for="degree"]');
+          label.before(input);
+        }
+
+        // Add the Cari button if it doesn't exist
+        const degreze = document.getElementById("degree");
+        if (!document.body.contains(caributton)) {
+          cariButton = document.createElement("button");
+          cariButton.type = "button";
+          cariButton.id = "resultBut";
+          cariButton.className = "btn btn-primary";
+          cariButton.textContent = "Cari";
+          form.appendChild(cariButton);
+
+          // Reattach the event listener to the new button
+          cariButton.addEventListener("click", () => {
+            const resultSin = Sin(degreze.value);
+            result.value = `Sin(${degreze.value}°) = ${resultSin}`;
+          });
+        }
+      });
+
+      sudutIstimewa.addEventListener("click", () => {
+        result.value = "";
+        sudutIstimewa.className = "nav-link text-body active";
+        sudutBerbagai.className = "nav-link text-body";
+
+        // Remove the input element and replace with select
+        const inputElement = document.getElementById("degree");
+        if (inputElement && inputElement.tagName === "INPUT") {
+          inputElement.remove();
+          const select = createSelectElement();
+          const label = document.querySelector('label[for="degree"]');
+          label.before(select);
+
+          select.addEventListener("change", () => {
+            const resultSin = Sin(select.value);
+            result.value = `Sin(${select.value}°) = ${resultSin}`;
+          });
+        }
+        // Remove the Cari button
+        caributton = document.getElementById("resultBut");
+        if (document.body.contains(caributton)) {
+          caributton.remove();
+        }
+      });
+
+      caributton.addEventListener("click", () => {
+        const resultSin = Sin(degree.value);
+        result.value = `Sin(${degree.value}°) = ${resultSin}`;
+      });
+    </script>
+    <script src="utils/math.js"></script>
+  </body>
+</html>
